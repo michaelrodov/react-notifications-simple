@@ -1,20 +1,19 @@
 let webpack = require('webpack');
 let path = require('path');
-let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 let NODE_ENV = (!process.env.NODE_ENV) ? "development" : process.env.NODE_ENV;
 let isDevelopment = NODE_ENV !== "production";
+console.log(isDevelopment + ":isDev");
 
-let isAnalyze = process.env.ANALYZE === "true";
 
-
-module.exports = {
+let config = {
     context: path.join(__dirname, "src"),
     devtool: isDevelopment ? "eval-source-map" : false,
-    entry: "./js/root.js",
+    entry: "root.js",
     resolve: {
-        extensions: ['.jsx', '.js'],
+        extensions: ['.scss', '.jsx', '.js'],
         modules: [
-            path.resolve('./js'),
+            path.resolve('./src/js'),
+            path.resolve('./src/style'),
             path.resolve('./node_modules')
         ]
     },
@@ -41,15 +40,11 @@ module.exports = {
     },
     output: {
         path: __dirname,
-        filename: "dest/bundle.min.js"
+        filename: "dist/bundle.min.js"
     },
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-        }),
-        new webpack.optimize.UglifyJsPlugin((isDevelopment) ? {sourceMap: false, minimize: false} : {
-            sourceMap: false,
-            minimize: true
         })
     ],
     devServer: {
@@ -64,6 +59,8 @@ module.exports = {
     }
 };
 
-if (isAnalyze) {
-    module.exports.plugins.push(new BundleAnalyzerPlugin());
+if (!isDevelopment) {
+    config.plugins.push(new webpack.optimize.UglifyJsPlugin({sourceMap: false, minimize: true}));
 }
+
+module.exports = config;

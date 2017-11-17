@@ -1,5 +1,5 @@
 import React from 'react';
-import NotificationsContainer from "./NotificationsContainer";
+import NotificationsContainer from "NotificationsContainer";
 
 export default class NotificationsPresentation extends React.Component {
     constructor(props){
@@ -10,6 +10,7 @@ export default class NotificationsPresentation extends React.Component {
         let notifications = [
             {text: "error occured", type: "error"},
             {text: "just for your information!", type: "info"},
+            {text: "alls good!", type: "ok"},
             {text: "Beware of the dog!", type: "warning"}
         ];
         return (

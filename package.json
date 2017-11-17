@@ -44,10 +44,9 @@
     "webpack-validator": "^3.0.0"
   },
   "scripts": {
-    "dev": "webpack-dev-server --content-base  --inline --hot  --port 4000",
+    "dev": "webpack-dev-server --inline --hot --progress --colors --port 4000",
     "dev-mock": "cross-env USE_MOCK=true npm run dev",
     "test": "cross-env NODE_ENV=test jest",
-    "build-analyze": "cross-env ANALYZE=true npm run build",
     "build": "cross-env NODE_ENV=production webpack -p --progress"
   },
   "authors": [
