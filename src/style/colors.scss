@@ -1,0 +1,102 @@
+
+/*This file contains all color definitions for the propject*/
+
+/*palette*/
+$color--incapsula-green: #69BD27;
+$color--incapsula-green-half: rgba(105, 189, 39, 0.5);
+$color--incapsula-yellow: #FFCF00;
+$color--incapsula-orange: #EE6F21;
+$color--incapsula-red: #C23934;
+$color--incapsula-blue: #01A9E0;
+$color--incapsula-purple: #4F2E7F;
+$color--incapsula-deep-purple: #251144;
+
+/*palette-grayscale*/
+$color--grey1: #F5F5F5;
+$color--grey2: #EEEEEE;
+$color--grey3: #DFDFDF;
+$color--grey4: rgba(0,0,0,0.54);
+$color--grey5: rgba(0,0,0,0.87);
+
+
+/*backgrounds*/
+$color--main-background: #f0f0f0;
+$color--header-background: #f5f5f5;
+$color--selected-background: #c9ebfc;
+$color--hovered-background: #ebebeb;
+$color--shaded-background: #ededed;
+$color--shaded-background-light: #f5f5f5;
+
+/*borders*/
+$color--main-border: #ddddde;
+$color--accent-border: #3150e0;
+
+/*texts*/
+$color--link-text: #01A9E0;
+$color--accent-text: #212121;
+$color--main-text: $color--grey5;
+$color--main-text-light: $color--grey4;
+$color--secondary-text: $color--grey4;
+$color--ok-text: $color--incapsula-green;
+$color--white: white;
+$color--black: black;
+
+/*shadows*/
+$color--shadow-grey4-half: rgba(0,0,0,0.27);
+
+/*notifications*/
+$color--notification-error: $color--incapsula-red;
+$color--notification-warning: $color--incapsula-orange;
+$color--notification-warning-light: $color--incapsula-yellow;
+
+/*styles*/
+.text--color-black{
+  color: $color--grey5;
+}
+.text--color-main {
+  color: $color--main-text;
+}
+.text--color-grey3{
+  color: $color--grey3;
+}
+.text--color-grey4{
+  color: $color--grey4
+}
+.text--incapsula-yellow{
+  color: $color--incapsula-yellow;
+}
+.text--incapsula-red{
+  color: $color--incapsula-red;
+}
+
+.text--color-grey5{
+  color: $color--grey5
+}
+.text--color-incapsula-green{
+  color: $color--incapsula-green
+}
+.text--color-light{
+  color: $color--main-text-light
+}
+
+.background-color--white {
+  background-color: $color--white;
+}
+.background-color--grey3 {
+  background-color: $color--grey3;
+}
+.background-color--transparent {
+  background-color: transparent;
+}
+.background-color--accent {
+  background-color: $color--link-text;
+}
+.border-color--main {
+  border-color: $color--main-border !important;
+}
+.border-color--grey3 {
+  border-color: $color--grey3 !important;
+}
+.border-color--grey2 {
+  border-color: $color--grey2 !important;
+}
