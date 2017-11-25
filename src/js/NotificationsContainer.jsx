@@ -1,16 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Notification from "Notification";
+import {eventService} from 'NotificationService';
 import "notification-container.scss";
 import "flex.scss";
 
 export default class NotificationsContainer extends React.Component {
     constructor(props) {
         super(props);
+        eventService.register(() => {
+            this.setState({notifications: eventService.getNotifications()})
+        });
+
+        this.state = {
+            notifications: eventService.getNotifications()
+        }
      }
 
     render() {
-        let notificationsList = this.props.notifications.map((el,inx) => {
+        console.dir(this.state.notifications);
+
+
+        let notificationsList = this.state.notifications.map((el,inx) => {
             return <Notification key={inx} text={el.text} type={el.type} />
         });
 
@@ -24,12 +35,10 @@ export default class NotificationsContainer extends React.Component {
 
 
 NotificationsContainer.propTypes = {
-    notifications: PropTypes.array,
     position: PropTypes.string
 };
 
 NotificationsContainer.defaultProps = {
-    notifications: [],
     position: "right-top"
 };
 

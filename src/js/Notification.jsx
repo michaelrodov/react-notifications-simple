@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import "notification";
+import * as NotificationService from "./NotificationService";
 
-export default class Notification extends React.Component {
+export default class Notification extends React.PureComponent {
     constructor(props) {
         super(props);
-        let types = [{type: "error", icon: "fa-times-circle"},
-            {type: "warning", icon: "fa-exclamation-circle"},
-            {type: "ok", icon: "fa-check-circle"},
-            {type: "info", icon: "fa-info-circle"}];
+        let types = [{type: NotificationService.NOTIFICATION_TYPES.ERROR, icon: "fa-times-circle"},
+            {type: NotificationService.NOTIFICATION_TYPES.WARNING, icon: "fa-exclamation-circle"},
+            {type: NotificationService.NOTIFICATION_TYPES.OK, icon: "fa-check-circle"},
+            {type: NotificationService.NOTIFICATION_TYPES.INFO, icon: "fa-info-circle"}];
         let iconClass = (!this.props.type) ? "" : "fa " + types.find((el) => el.type === this.props.type).icon;
 
         this.state = {
