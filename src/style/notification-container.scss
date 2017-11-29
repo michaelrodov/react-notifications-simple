@@ -1,8 +1,7 @@
 .notifications-container {
-    .right-top {
+    &.start-left {
         position: fixed;
         top: 0;
-        right: 0;
-
+        left: 0;
     }
 }

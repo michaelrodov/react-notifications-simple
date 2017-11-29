@@ -14,13 +14,31 @@ export default class NotificationsPresentation extends React.Component {
     render() {
         return (
             <div>
-                <NotificationsContainer />
+                <NotificationsContainer position={"left"}/>
                 <button onClick={() => {
-                    eventService.addWarning("shits gonna be hot")
-                }}>Add</button>
+                    eventService.addWarning("I warn you!")
+                }}>Add Warning
+                </button>
+
                 <button onClick={() => {
                     eventService.removeTop()
-                }}>remove</button>
+                }}>Remove Top
+                </button>
+
+                <button onClick={() => {
+                    eventService.addError("Something went wrong")
+                }}>Add Error
+                </button>
+
+                <button onClick={() => {
+                    eventService.addOk("Finished successfully!")
+                }}>OK
+                </button>
+
+                <button onClick={() => {
+                    eventService.addInfo("Information is power")
+                }}>Add Info
+                </button>
             </div>
         );
     }

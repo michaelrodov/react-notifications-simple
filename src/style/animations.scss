@@ -1,58 +1,24 @@
 
 /*animation classes used by the application*/
-@keyframes flicker-opacity {
-  0% {  opacity: 1;  }
-  50% {  opacity: 0;  }
-  100% {  opacity: 1;  }
+@keyframes __slide_left {
+  0% {  opacity: 1; transform: translate(-15px) }
+  100% {  opacity: 0; transform: translate(-100%)  }
+}
+@keyframes __slide_right {
+  0% {  opacity: 0; transform: translate(-100%) }
+  100% {  opacity: 1; transform: translate(15px)  }
 }
 
-@keyframes __fade_grow {
-  0% {opacity: 0; width: 0}
-  80% {opacity: 0; width: 100%}
-  100% {opacity: 1; width: 100%}
+.animate__slide_left {
+    animation-name: __slide_left;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
 }
 
-
-.animate__fadein-opacity {
-  -webkit-animation-name: __fade;
-  -webkit-animation-duration: 0.5s;
-  -webkit-animation-timing-function: ease;
-  -webkit-animation-fill-mode: forwards;
-}
-.animate__fadeout-opacity {
-  -webkit-animation-name: __fade;
-  -webkit-animation-duration: 0.5s;
-  -webkit-animation-timing-function: ease;
-  -webkit-animation-direction: reverse;
-  -webkit-animation-fill-mode: forwards;
-}
-
-.animate--flicker-opacity {
-  animation: flicker-opacity 0.3s ease;
-}
-
-.animate--fadein-expand {
-  -webkit-animation-name: __fade_grow;
-  -webkit-animation-duration: 0.5s;
-  -webkit-animation-timing-function: ease;
-  -webkit-animation-fill-mode: forwards;
-
-  animation-name: __fade_grow;
-  animation-duration: 0.5s;
-  animation-timing-function: ease;
-  animation-fill-mode: forwards;
-}
-
-.animate--fadeout-contract {
-  -webkit-animation-name: __fade_grow;
-  -webkit-animation-duration: 0.5s;
-  -webkit-animation-timing-function: ease;
-  -webkit-animation-direction: reverse;
-  -webkit-animation-fill-mode: forwards;
-
-  animation-name: __fade_grow;
-  animation-duration: 0.5s;
-  animation-timing-function: ease;
-  animation-direction: reverse;
-  animation-fill-mode: forwards;
+.animate__slide_right {
+    animation-name: __slide_right;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
 }

@@ -23,7 +23,9 @@ export default class Notification extends React.PureComponent {
                             <i className={this.state.iconClass} aria-hidden="true"/>
                       </span>;
         return (
-            <span id={"container"} className={"flex flex__row flex__justify-between notification " + this.props.type}>
+            <span id={"container"}
+                  onClick={() => NotificationService.eventService.remove(this.props.id)}
+                  className={"flex flex__row flex__justify-between notification " + this.props.type + " " + this.props.className}>
                 <span className={"flex flex__row flex__justify_start"}>
                     {iconDom}
                     <span id={"message"} className={"notification-message"}>{this.props.text}</span>
