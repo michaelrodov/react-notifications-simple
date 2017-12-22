@@ -1,7 +1,16 @@
+@import "zindex";
+
 .notifications-container {
+    z-index: $zindex--ground;
     &.start-left {
         position: fixed;
         top: 0;
         left: 0;
+    }
+
+    .removed {
+        z-index: $zindex--ground + 1;
+        position: absolute;
+        margin: 0;
     }
 }

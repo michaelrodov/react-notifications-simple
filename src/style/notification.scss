@@ -1,15 +1,18 @@
 @import "colors";
 
+$notification-min-width: 100px;
+$notification-min-height: 30px;
+
 .notification {
-    min-width: 100px;
+    min-width: $notification-min-width;
     width: fit-content;
-    min-height: 30px;
+    min-height: $notification-min-height;
     border-radius: 10px;
     opacity: 0.9;
     align-items: center;
     border: solid 1px $color--grey3;
-    margin: 15px;
-    padding: 15px;
+    margin-bottom: 30px;
+    padding: 5px;
     cursor: pointer;
     transition: opacity 0.5s ease-out;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.1);
@@ -29,6 +32,7 @@
         opacity: 1;
         transition: opacity 0.5s ease-out;
     }
+
     &.error {
         background-color: $color--incapsula-red;
 
@@ -37,12 +41,14 @@
         background-color: $color--incapsula-green-half;
 
     }
-
     &.warning {
         background-color: $color--incapsula-yellow;
     }
-
     &.info {
         background-color: $color--incapsula-blue;
     }
+}
+
+.fadingPlaceholder {
+    opacity: 0;
 }

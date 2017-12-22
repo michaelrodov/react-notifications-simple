@@ -1,80 +1,47 @@
-export const NOTIFICATION_TYPES = {
-    ERROR: "error",
-    WARNING: "warning",
-    INFO: "info",
-    OK: "ok"
-};
+import setStore from "./redux/ReduxStore";
+import * as ReduxReducers from "./redux/ReduxReducers";
+import * as ReduxActions from "./redux/ReduxActions";
+
 
 //TODO add notification decorator
 class EventService {
     constructor() {
-        this.notifications = [];
+       this.store = setStore(ReduxReducers.reducer);
+
     }
 
-    register(callback) {
-        this.callbackFunction = callback;
+    getStore() {
+        return this.store;
     }
+
 
     getNotifications() {
-        return this.notifications;
+        return this.store.getState().notifications;
     }
 
-    removeTop() {
-        this._update(() => {
-            this.notifications.shift();
-        });
-    }
 
     remove(id) {
-        this._update(() => {
-            this.notifications[this.notifications.findIndex(el => el.id === id)].out = true;
-            setTimeout(() => {
-                this.notifications = this.notifications.filter(el => el.id !== id);
-            }, 500);
-
-        });
+        this.store.dispatch(ReduxActions.removeNotification(id));
     }
 
     addWarning(text) {
-        this._update(() => {
-            this.notifications.push(EventService._generateNotification(NOTIFICATION_TYPES.WARNING, text));
-        });
+        this.store.dispatch(ReduxActions.addWarning(text, false));
     }
 
     addOk(text) {
-        this._update(() => {
-            this.notifications.push(EventService._generateNotification(NOTIFICATION_TYPES.OK, text));
-        });
+        this.store.dispatch(ReduxActions.addOK(text, false));
     }
 
     addError(text) {
-        this._update(() => {
-            this.notifications.push(EventService._generateNotification(NOTIFICATION_TYPES.ERROR, text));
-        });
+        this.store.dispatch(ReduxActions.addError(text, false));
     }
 
     addInfo(text) {
-        this._update(() => {
-            this.notifications.push(EventService._generateNotification(NOTIFICATION_TYPES.INFO, text));
-        });
+        this.store.dispatch(ReduxActions.addInfo(text, false));
     }
 
 
-    _update(func) {
-        func();
-        if (!!this.callbackFunction) {
-            setTimeout(this.callbackFunction(), 0);
-        }
-    }
 
-    static _generateNotification(type, text) {
-        return {id: _generateId(), type: type, text: text, out: false}
-    }
 }
 
-export let eventService = new EventService();
-
-function _generateId() {
-    let size = 10000000;
-    return Math.floor((Math.random() * size));
-}
+export let notificationService = new EventService();
