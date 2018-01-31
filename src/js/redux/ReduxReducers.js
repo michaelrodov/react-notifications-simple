@@ -34,16 +34,18 @@ export function reducer(state = initialState, action = {type: actionTypes.INIT_S
     } else if (action.type === actionTypes.ADD_WARNING) {
         notifications.push(_generateNotification(state.notificationTypes.WARNING, action.message));
     } else if (action.type === actionTypes.REMOVE_NOTIFICATION) {
+        console.log("removing: " + action.id);
         //set the notification to be removed
         notifications[notifications.findIndex(el => el.id === action.id)].removed = true;
         //add a decorative placeholder to imitate all queue going up
         let placeholder = _generateNotification(state.notificationTypes.PLACEHOLDER, "");
+        console.log("adding placeholder: " + placeholder.id);
         notifications.splice(notifications.findIndex(el => el.id === action.id), 0, placeholder);
     } else if (action.type === actionTypes.PURGE_NOTIFICATION) {
         notifications = notifications.slice().filter(el => el.id !== action.id && !el.removed);
     }
 
-    newState.notifications = notifications;
+    newState.notifications = notifications.slice();
     return newState;
 
 }

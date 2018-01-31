@@ -35,8 +35,8 @@ export default class NotificationsContainer extends React.Component {
 
         this.state = {
             reduxState: this.props.store.getState(),
-            slideIn: slideIns[this.props.position],
-            slideOut: slideOuts[this.props.position],
+            slideIn: "animate__slide_in",
+            slideOut: "animate__slide_out",
             containerClass: starts[this.props.position]
         }
     }
@@ -60,12 +60,12 @@ export default class NotificationsContainer extends React.Component {
 
         });
 
-        let notificationsDom = <span className={"flex flex__column flex__justify-start"}
+        let notificationsDom = <span className={"flex flex__column flex__justify-start " + this.props.position}
                                      style={{position: "relative"}}>
                                     {notificationsList}
                                 </span>;
 
-        return (<span className={"notifications-container " + this.props.containerClass}>{notificationsDom}</span>)
+        return (<span className={"notifications-container " + this.props.position}>{notificationsDom}</span>)
     }
 
     _reduxStateChanged() {

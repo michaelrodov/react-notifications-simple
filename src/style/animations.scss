@@ -1,25 +1,83 @@
 /*animation classes used by the application*/
 $notification-slide-animation-time: 0.5s;
 
-@keyframes __slide_left {
+@keyframes __left-slide-out {
     0% {
         opacity: 1;
-        transform: translate(-15px)
+        transform: translate(0)
     }
     100% {
         opacity: 0;
-        transform: translate(-100%)
+        transform: translate(-110%)
     }
 }
 
-@keyframes __slide_right {
+@keyframes __left-slide-in {
     0% {
         opacity: 0;
-        transform: translate(-100%)
+        transform: translate(-110%)
     }
     100% {
         opacity: 1;
-        transform: translate(15px)
+        transform: translate(0)
+    }
+}
+
+@keyframes __right-slide-in {
+    0% {
+        opacity: 0;
+        transform: translate(110%)
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0)
+    }
+}
+
+@keyframes __right-slide-out {
+    0% {
+        opacity: 1;
+        transform: translate(0)
+    }
+    100% {
+        opacity: 0;
+        transform: translate(110%)
+    }
+}
+
+@keyframes __top-slide-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes __top-slide-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes __bottom-slide-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes __bottom-slide-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }
 
@@ -32,18 +90,60 @@ $notification-slide-animation-time: 0.5s;
     }
 }
 
-.animate__slide_left {
-    animation-name: __slide_left;
+.animate__slide_out {
     animation-duration: $notification-slide-animation-time;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
 }
 
-.animate__slide_right {
-    animation-name: __slide_right;
+.animate__slide_in {
     animation-duration: $notification-slide-animation-time;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
+}
+
+.left {
+    align-items: flex-end;
+    .animate__slide_out {
+        animation-name: __left-slide-out;
+    }
+
+    .animate__slide_in {
+        animation-name: __left-slide-in;
+    }
+}
+
+.right {
+    align-items: flex-start;
+    .animate__slide_out {
+        animation-name: __right-slide-out;
+    }
+
+    .animate__slide_in {
+        animation-name: __right-slide-in;
+    }
+}
+
+.top {
+    align-items: center;
+    .animate__slide_out {
+        animation-name: __top-slide-out;
+    }
+
+    .animate__slide_in {
+        animation-name: __top-slide-in;
+    }
+}
+
+.bottom {
+    align-items: center;
+    .animate__slide_out {
+        animation-name: __bottom-slide-out;
+    }
+
+    .animate__slide_in {
+        animation-name: __bottom-slide-in;
+    }
 }
 
 .animate__fading_placeholder {
