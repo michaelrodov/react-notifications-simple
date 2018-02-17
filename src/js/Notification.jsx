@@ -33,7 +33,7 @@ export default class Notification extends React.PureComponent {
         return (
             <span id={containerId}
                   style={containerStyle}
-                  onClick={() => NotificationService.notificationService.remove(this.props.id)}
+                  onClick={() => NotificationService.NotificationService.remove(this.props.id)}
                   className={"flex flex__row flex__justify-between notification " + this.props.type + " " + this.props.className}>
                 <span className={"flex flex__row flex__justify_start"}>
                     {iconDom}
