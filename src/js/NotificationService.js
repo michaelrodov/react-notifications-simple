@@ -44,4 +44,4 @@ class EventService {
 
 }
 
-export let notificationService = new EventService();
+export let NotificationService = new EventService();
