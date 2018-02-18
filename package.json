@@ -2,8 +2,15 @@
   "name": "react-notifications-simple",
   "version": "0.0.1",
   "description": "Customizable and simple notifications and toasters written for ReactJS",
-  "keywords": ["notification","notifications","simple","toaster","react","reactjs"],
-  "main": "index.js",
+  "keywords": [
+    "notification",
+    "notifications",
+    "simple",
+    "toaster",
+    "react",
+    "reactjs"
+  ],
+  "main": "./lib/react-notifications-simple.min.js",
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
