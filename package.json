@@ -1,7 +1,7 @@
 {
   "name": "react-notifications-simple",
   "version": "0.0.1",
-  "description": "Customizable and simple notifications and toasters written for ReactJS",
+  "description": "Customizable yet simple notifications and toasters written for ReactJS",
   "keywords": [
     "notification",
     "notifications",
@@ -10,7 +10,7 @@
     "react",
     "reactjs"
   ],
-  "main": "./lib/react-notifications-simple.min.js",
+  "main": "lib/react-notifications-simple.min.js",
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -51,19 +51,22 @@
     "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^2.9.1",
     "webpack-dev-server": "^2.9.7",
+    "webpack-merge": "^4.1.1",
     "webpack-validator": "^3.0.0"
   },
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot --progress --colors --port 4000",
-    "dev-mock": "cross-env USE_MOCK=true npm run dev",
-    "test": "cross-env NODE_ENV=test jest",
-    "build": "cross-env NODE_ENV=production webpack -p --progress"
+    "dev": "webpack-dev-server --env.development --inline --hot --progress --colors --port 4000 --config webpack.dev.config.js",
+    "test": "jest --env.test",
+    "build": "webpack --env.production -p --progress  --config webpack.prod.config.js"
   },
   "authors": [
     "Michael Rodov"
   ],
   "private": false,
   "license": "MIT",
+  "files": [
+    "lib"
+  ],
   "repository": "https://github.com/michaelrodov/react-notifications-simple",
   "jest": {
     "transform": {
@@ -119,3 +122,5 @@
     }
   }
 }
+
+

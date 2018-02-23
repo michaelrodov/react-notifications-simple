@@ -3,7 +3,7 @@ let path = require('path');
 
 
 let config = {
-    context: path.join(__dirname, "src"),
+    context: __dirname,
     resolve: {
         extensions: ['.scss', '.jsx', '.js'],
         modules: [
@@ -32,7 +32,8 @@ let config = {
                 loaders: ['svg-url-loader']
             }
         ]
-    }
+    },
+    plugins: []
 };
 
 
