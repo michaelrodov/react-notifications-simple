@@ -1,37 +1,57 @@
-## Welcome to GitHub Pages
+# Simple React Notifications
+The purspose of this package is to provide notifications that are simple to use and understand,
+yet have enough flexability in order to use them in different [react](https://reactjs.org/) projects.
 
-You can use the [editor on GitHub](https://github.com/michaelrodov/react-notifications-simple/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+## Installation
+```js
+npm install react-notifications-simple
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Usage
+You will need to include two objects in order to use the notifications module.
+NotificationsContainer which contains all your notifications, its position is fixed and controlled by its "position" property
+NotificationService which is the controller of the notifications, through which you can add notifications.
 
-### Jekyll Themes
+```javascript
+import {NotificationsContainer, NotificationService} from "react-notifications-simple";
+export default class App extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/michaelrodov/react-notifications-simple/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+    render() {
+        return (
+            <div>
+ <NotificationsContainer position={"left"} theme={{className: "office",
+                                            includeCloseButton: false,
+                                            includeIcon: true}}
+                                        store={NotificationService.getStore()}/>
+                <div>
+                    <button onClick={() => {NotificationService.addWarning("I warn you!")}}>Add Warning</button>
+                    <button onClick={() => {NotificationService.addError("Something went wrong")}}>Add Error</button>
+                    <button onClick={() => {NotificationService.addOk("Finished successfully!")}}>OK</button>
+                    <button onClick={() => {NotificationService.addInfo("Information is power")}}>Add Info</button>
+                </div>
+            </div>
+        );
+    }
+}
+```
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## NotificationsContainer
+ * position (string): "left"/"right"/"top"/"bottom"
+ * theme (object)
+    * className (string): builtIn styles "office"/"cartoons" or your css class that will style notifications the way you need
+    * includeCloseButton (boolean) - whether to include close button or not 
+      true: only clicking on the close button will close the notification
+      false: clicking on the anywhere in the notification will close it
+    * includeIcon (boolean) - wheter to include notification severity icon on the left of the notification or not.      
+ * store: always set to NotificationService.getStore()     
+ 
+ ## NotificationService
+  * currently has 4 functions (in the future more options will be added)
+      * addWarning
+      * addError
+      * addOk
+      * addInfo
