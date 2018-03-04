@@ -52,7 +52,9 @@ export default class NotificationsContainer extends React.Component {
                                      text={el.text}
                                      store={this.props.store}
                                      removed={el.removed}
-                                     className={(el.removed) ? "removed " + this.state.slideOut : this.state.slideIn}
+                                     includeCloseButton={this.props.theme.includeCloseButton}
+                                     includeIcon={this.props.theme.includeIcon}
+                                     className={this.props.theme.className + " " + ((el.removed) ? "removed " + this.state.slideOut : this.state.slideIn)}
                                      type={el.type}/>
             } else {
                 return <FadingPlaceholder key={el.id} id={el.id}/>
@@ -78,10 +80,17 @@ export default class NotificationsContainer extends React.Component {
 
 NotificationsContainer.propTypes = {
     position: PropTypes.string,
-    store: PropTypes.object
+    store: PropTypes.object,
+    theme: PropTypes.object
 };
 
 NotificationsContainer.defaultProps = {
-    position: "right-top"
+    position: "right-top",
+    theme: {
+        className: 'cartoons',
+        includeCloseButton: false,
+        includeIcon: true
+
+    }
 };
 

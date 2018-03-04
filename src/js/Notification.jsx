@@ -8,8 +8,8 @@ export default class Notification extends React.PureComponent {
         super(props);
         let reduxState = this.props.store.getState();
         let types = [
-            {type: reduxState.notificationTypes.ERROR, icon: "fa-times-circle"},
-            {type: reduxState.notificationTypes.WARNING, icon: "fa-exclamation-circle"},
+            {type: reduxState.notificationTypes.ERROR, icon: "fa-exclamation-circle"},
+            {type: reduxState.notificationTypes.WARNING, icon: "fa-exclamation-triangle"},
             {type: reduxState.notificationTypes.OK, icon: "fa-check-circle"},
             {type: reduxState.notificationTypes.INFO, icon: "fa-info-circle"}
         ];
@@ -24,11 +24,20 @@ export default class Notification extends React.PureComponent {
 
     render() {
 
-        let iconDom = <span id={"icon"} className={"notification-icon"}>
+        let iconDom = <div style={{width: "15px"}} />;
+        if(this.props.includeIcon){
+            iconDom = <span id={"icon"} className={"notification-icon flex flex__column flex__justify-center"}>
                             <i className={this.state.iconClass} aria-hidden="true"/>
-                      </span>;
+                      </span>
+        }
+
         const containerId = "container_" + this.props.id;
         const containerStyle = (this.props.removed) ? this._getNotificationTop(containerId) : {};
+
+        let closeButtonDom = <div style={{width: "15px"}} />;
+        if(this.props.includeCloseButton) {
+            closeButtonDom = <span className={"notification-close flex"}><i className="fa fa-times" aria-hidden="true"/></span>;
+        }
 
         return (
             <span id={containerId}
@@ -39,7 +48,7 @@ export default class Notification extends React.PureComponent {
                     {iconDom}
                     <span id={"message"} className={"notification-message"}>{this.props.text}</span>
                 </span>
-                <span className={"notification-close"}><i className="fa fa-times" aria-hidden="true"/></span>
+                {closeButtonDom}
             </span>
         )
     }
@@ -57,12 +66,16 @@ Notification.propTypes = {
     style: PropTypes.object,
     text: PropTypes.string,
     icon: PropTypes.string,
-    removed: PropTypes.bool
+    removed: PropTypes.bool,
+    includeCloseButton: PropTypes.bool,
+    includeIcon: PropTypes.bool
 };
 
 Notification.defaultProps = {
     className: "",
     style: {},
-    type: ""
+    type: "",
+    includeCloseButton: false,
+    includeIcon: true
 };
 
