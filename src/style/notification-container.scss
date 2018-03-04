@@ -1,0 +1,42 @@
+@import "zindex";
+
+$side-margin: 10px;
+
+.notifications-container {
+    position: fixed;
+    z-index: $zindex--ground;
+
+    &.left {
+        top: $side-margin;
+        left: $side-margin;
+    }
+
+    &.right {
+        top: $side-margin;
+        right: $side-margin;
+    }
+    &.top {
+        top: $side-margin;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    &.bottom {
+        bottom: $side-margin;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    .removed {
+        z-index: $zindex--underground;
+        position: absolute;
+        margin: 0;
+    }
+
+    .right {
+        align-items: flex-end;
+    }
+
+    .left {
+        align-items: flex-start;
+    }
+}
