@@ -2,6 +2,8 @@ import React from 'react';
 import NotificationsContainer from "NotificationsContainer";
 import faker from "faker";
 import {NotificationService} from 'NotificationService';
+import "../style/presentation.scss";
+
 
 export default class NotificationsPresentation extends React.Component {
     constructor(props) {
@@ -11,29 +13,66 @@ export default class NotificationsPresentation extends React.Component {
         NotificationService.addInfo(faker.lorem.sentence());
         NotificationService.addError(faker.lorem.sentence());
         NotificationService.addOk(faker.lorem.sentence());
-        this.state = {position: "top"};
+
+        this.state = {position: "top", includeCloseButton: true, includeIcon: true, themeName: "cartoons"};
     }
 
     render() {
         return (
             <div style={{height: "95vh"}}>
                 <NotificationsContainer position={this.state.position}
+                                        autoRemovalTimeout={5000}
                                         theme={{
-                                            className: "office",
-                                            includeCloseButton: false,
-                                            includeIcon: true
+                                            className: this.state.themeName,
+                                            includeCloseButton: this.state.includeCloseButton,
+                                            includeIcon: this.state.includeIcon
                                         }}
                                         store={NotificationService.getStore()}/>
                 <div style={{position: "absolute", bottom: "10px"}}>
-                    <button onClick={() => {NotificationService.addWarning("In dog we trust! sdfd fdsf ddfsdfsdf sdfs dfsdf sdfsdf sdfs dfsd fsdf sdfsd fsdf sdfsd  fsdf sdf sdfs dfs df")}}>Add Warning</button>
-                    <button onClick={() => {NotificationService.addError("Something went wrong")}}>Add Error</button>
-                    <button onClick={() => {NotificationService.addOk("Finished successfully!")}}>OK</button>
-                    <button onClick={() => {NotificationService.addInfo("Information is power")}}>Add Info</button>
-
-                    <button onClick={() => {this.setState({position: "left"})}}>Left</button>
-                    <button onClick={() => {this.setState({position: "top"})}}>Top</button>
-                    <button onClick={() => {this.setState({position: "bottom"})}}>Bottom</button>
-                    <button onClick={() => {this.setState({position: "right"})}}>Right</button>
+                    <div className={"flex flex__row"}>
+                        <span className={"margin-right"} >Controls</span>
+                        <button className={"margin-right"} onClick={() => {
+                            NotificationService.addWarning(faker.lorem.sentence())
+                        }}>Add Warning
+                        </button>
+                        <button className={"margin-right"} onClick={() => {
+                            NotificationService.addError(faker.lorem.sentence())
+                        }}>Add Error
+                        </button>
+                        <button className={"margin-right"} onClick={() => {
+                            NotificationService.addOk(faker.lorem.sentence())
+                        }}>OK
+                        </button>
+                        <button className={"margin-right"} onClick={() => {
+                            NotificationService.addInfo(faker.lorem.sentence())
+                        }}>Add Info
+                        </button>
+                    </div>
+                    <div>
+                        <span className={"margin-right"} >Configs</span>
+                        <button className={"margin-right"} onClick={() => {
+                            this.setState({position: "left"})
+                        }}>position=left
+                        </button>
+                        <button className={"margin-right"} onClick={() => {
+                            this.setState({position: "top"})
+                        }}>position=top
+                        </button>
+                        <button className={"margin-right"} onClick={() => {
+                            this.setState({position: "bottom"})
+                        }}>position=bottom
+                        </button>
+                        <button className={"margin-right"} onClick={() => {
+                            this.setState({position: "right"})
+                        }}>position=right
+                        </button>
+                        <button className={"margin-right"} onClick={() => {
+                            this.setState({includeCloseButton: !this.state.includeCloseButton})
+                        }}>{"includeCloseButton=" + this.state.includeCloseButton}</button>
+                        <button className={"margin-right"} onClick={() => {
+                            this.setState({includeIcon: !this.state.includeIcon})
+                        }}>{"includeIcon="+this.state.includeIcon}</button>
+                    </div>
                 </div>
             </div>
         );

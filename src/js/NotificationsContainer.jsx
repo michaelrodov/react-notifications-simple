@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Notification from "Notification";
 import FadingPlaceholder from "FadingPlaceholder";
+import * as ReduxActions from "./redux/ReduxActions";
+
 import "notification-container.scss";
 import "flex.scss";
 import "animations.scss";
+import {NotificationService} from "./NotificationService";
 
 
 export default class NotificationsContainer extends React.Component {
@@ -38,6 +41,23 @@ export default class NotificationsContainer extends React.Component {
             slideIn: "animate__slide_in",
             slideOut: "animate__slide_out",
             containerClass: starts[this.props.position]
+        };
+
+        this.props.store.dispatch(ReduxActions.setAutoRemovalTimeout(this.props.autoRemovalTimeout));
+    }
+
+    //before react 16
+    //TODO: REFACTOR | Remove after react 15 EOL
+    componentWillReceiveProps(nextProps){
+        if(nextProps.setAutoRemovalTimeout !== this.props.autoRemovalTimeout){
+            this.props.store.dispatch(ReduxActions.setAutoRemovalTimeout(nextProps.autoRemovalTimeout));
+        }
+    }
+
+    //react 16+
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.setAutoRemovalTimeout !== this.props.autoRemovalTimeout){
+            this.props.store.dispatch(ReduxActions.setAutoRemovalTimeout(nextProps.autoRemovalTimeout));
         }
     }
 
@@ -47,6 +67,7 @@ export default class NotificationsContainer extends React.Component {
 
         let notificationsList = reduxState.notifications.map((el) => {
             if (el.type.localeCompare(reduxState.notificationTypes.PLACEHOLDER) !== 0) {
+
                 return <Notification key={el.id}
                                      id={el.id}
                                      text={el.text}
@@ -55,6 +76,14 @@ export default class NotificationsContainer extends React.Component {
                                      includeCloseButton={this.props.theme.includeCloseButton}
                                      includeIcon={this.props.theme.includeIcon}
                                      className={this.props.theme.className + " " + ((el.removed) ? "removed " + this.state.slideOut : this.state.slideIn)}
+                                     destructor={() => {
+                                         const timeout = ((!Number.isInteger(el.autoRemovalTimeout) || el.autoRemovalTimeout < 0) ? null : el.autoRemovalTimeout)
+                                                            || reduxState.autoRemovalTimeout;
+                                         if(!!timeout){
+                                             setTimeout(() => {this.props.store.dispatch(ReduxActions.removeNotification(el.id))},timeout);
+                                         }
+
+                                     }}
                                      type={el.type}/>
             } else {
                 return <FadingPlaceholder key={el.id} id={el.id}/>
@@ -81,7 +110,8 @@ export default class NotificationsContainer extends React.Component {
 NotificationsContainer.propTypes = {
     position: PropTypes.string,
     store: PropTypes.object,
-    theme: PropTypes.object
+    theme: PropTypes.object,
+    autoRemovalTimeout: PropTypes.number
 };
 
 NotificationsContainer.defaultProps = {
@@ -90,7 +120,6 @@ NotificationsContainer.defaultProps = {
         className: 'cartoons',
         includeCloseButton: false,
         includeIcon: true
-
     }
 };
 
