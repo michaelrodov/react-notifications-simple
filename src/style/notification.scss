@@ -33,7 +33,6 @@ $notification-min-height: 30px;
         transition: opacity 0.5s ease-out;
     }
 
-
     &.error {
         background-color: $color--notification-red;
 
@@ -79,7 +78,6 @@ $notification-min-height: 30px;
         transition: opacity 0.3s ease-out;
     }
 
-
     &.error {
         background-color: $color--notification-red;
 
@@ -99,3 +97,32 @@ $notification-min-height: 30px;
 .fadingPlaceholder {
     opacity: 0;
 }
+
+.button-close {
+    position: absolute;
+    right: 32px;
+    top: 32px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &:before, &:after {
+        position: absolute;
+        left: 15px;
+        content: ' ';
+        height: 33px;
+        width: 2px;
+        background-color: #333;
+    }
+    &:before {
+        transform: rotate(45deg);
+    }
+    &:after {
+        transform: rotate(-45deg);
+    }
+}
+

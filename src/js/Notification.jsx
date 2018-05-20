@@ -7,12 +7,10 @@ export default class Notification extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        let closeButtonDom = <div style={{width: "15px"}}/>;
+        let closeButtonDom = <div className={"notification-close flex button-close"}/>;
 
-        if (this.props.includeCloseButton) {
-            closeButtonDom = <span className={"notification-close flex"}>
-                <i className="fa fa-times" aria-hidden="true"/>
-            </span>;
+        if (!this.props.includeCloseButton) {
+            closeButtonDom = <div style={{width: "15px"}}/>
         }
 
 
@@ -57,16 +55,15 @@ export default class Notification extends React.PureComponent {
 
 
         return (
-            <span id={containerId}
-                  style={containerStyle}
+            <div id={containerId} style={containerStyle}
                   onClick={() => NotificationService.NotificationService.remove(this.props.id)}
                   className={"flex flex__row flex__justify-between notification " + this.props.type + " " + this.props.className}>
-                <span className={"flex flex__row flex__justify_start"}>
-                    {this.state.iconElement}
-                    <span id={"message"} className={"notification-message"}>{this.props.content}</span>
-                </span>
-                {this.state.closeButtonDom}
-            </span>
+                <div>{this.state.iconElement}</div>
+                <div className={"flex flex__row flex__justify_start"}>
+                    <div id={"message"} className={"notification-message"}>{this.props.content}</div>
+                </div>
+                <div>{this.state.closeButtonDom}</div>
+            </div>
         )
     }
 

@@ -11,10 +11,11 @@ export default class NotificationsPresentation extends React.Component {
         //just for presentation sake
         NotificationService.addNotification(<span>{faker.lorem.sentence()}</span>);
         NotificationService.addNotification(<span>{faker.lorem.sentence()}</span>);
-        NotificationService.addNotification(<div style={{display: "flex", flexFlow:"column"}}>
-            <span>{faker.lorem.sentence()}</span>
-            <span><a>Retry</a></span>
-        </div>);
+        NotificationService.addNotification(
+            <div style={{display: "flex", flexFlow:"column"}}>
+                <span>{faker.lorem.sentence()}</span>
+                <span><a>Retry</a></span>
+            </div>);
         NotificationService.addNotification(<span>{faker.lorem.sentence()}</span>);
 
         this.state = {position: "top", includeCloseButton: true, includeIcon: true, themeName: "office"};
