@@ -55,3 +55,8 @@ export default class App extends React.Component {
       * addError
       * addOk
       * addInfo
+      
+| Function  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |

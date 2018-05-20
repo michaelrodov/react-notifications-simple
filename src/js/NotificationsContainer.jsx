@@ -7,7 +7,7 @@ import * as ReduxActions from "./redux/ReduxActions";
 import "notification-container.scss";
 import "flex.scss";
 import "animations.scss";
-import {NotificationService} from "./NotificationService";
+// import "../fonts/font-awesome-4.7.0/css/font-awesome.min.css";
 
 
 export default class NotificationsContainer extends React.Component {
@@ -70,11 +70,11 @@ export default class NotificationsContainer extends React.Component {
 
                 return <Notification key={el.id}
                                      id={el.id}
-                                     text={el.text}
+                                     content={el.content}
                                      store={this.props.store}
+                                     icon={el.icon}
                                      removed={el.removed}
                                      includeCloseButton={this.props.theme.includeCloseButton}
-                                     includeIcon={this.props.theme.includeIcon}
                                      className={this.props.theme.className + " " + ((el.removed) ? "removed " + this.state.slideOut : this.state.slideIn)}
                                      destructor={() => {
                                          const timeout = ((!Number.isInteger(el.autoRemovalTimeout) || el.autoRemovalTimeout < 0) ? null : el.autoRemovalTimeout)

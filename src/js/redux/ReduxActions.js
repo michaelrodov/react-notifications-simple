@@ -1,34 +1,11 @@
 import * as actionTypes from "./ReduxActionTypes";
 
-export function addInfo(message, isTop, autoRemovalTimeout) {
+export function addNotification(message, isTop, autoRemovalTimeout, icon) {
     return {
-        type: actionTypes.ADD_INFO,
+        type: actionTypes.ADD_NOTIFICATION,
         message: message,
-        autoRemovalTimeout:autoRemovalTimeout
-    }
-}
-
-export function addOK(message, isTop, autoRemovalTimeout) {
-    return {
-        type: actionTypes.ADD_OK,
-        message: message,
-        autoRemovalTimeout:autoRemovalTimeout
-    }
-}
-
-export function addError(message, isTop, autoRemovalTimeout) {
-    return {
-        type: actionTypes.ADD_ERROR,
-        message: message,
-        autoRemovalTimeout:autoRemovalTimeout
-    }
-}
-
-export function addWarning(message, isTop, autoRemovalTimeout) {
-    return {
-        type: actionTypes.ADD_WARNING,
-        message: message,
-        autoRemovalTimeout:autoRemovalTimeout
+        autoRemovalTimeout:autoRemovalTimeout,
+        icon: icon
     }
 }
 
@@ -39,13 +16,6 @@ export function removeNotification(id) {
     }
 }
 
-
-export function addNotification(id, type) {
-    return {
-        type: actionTypes.REMOVE_NOTIFICATION,
-        id: id
-    }
-}
 export function setAutoRemovalTimeout(ms) {
     return {
         type: actionTypes.SET_AUTO_REMOVAL_TIMEOUT,

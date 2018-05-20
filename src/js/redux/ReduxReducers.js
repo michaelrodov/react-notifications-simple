@@ -12,10 +12,10 @@ export const initialState = {
         PLACEHOLDER: "placeholder"
     },
     notificationIcons: {
-        error: "fas fa-exclamation-circle",
-        warning: "fas fa-exclamation-triangle",
-        info: "fas fa-info-circle",
-        ok: "fas fa-check-circle"
+        error: "fa fa-exclamation-circle",
+        warning: "fa fa-exclamation-triangle",
+        info: "fa fa-info-circle",
+        ok: "fa fa-check-circle"
     }
 };
 
@@ -34,20 +34,23 @@ export function reducer(state = initialState, action = {type: actionTypes.INIT_S
         return newState;
     }
 
+    else if (action.type === actionTypes.ADD_NOTIFICATION) {
+        notifications.push(_generateNotification(state.notificationTypes.OK, action.message, action.autoRemovalTimeout, action.icon));
+    }
     else if (action.type === actionTypes.ADD_OK) {
-        notifications.push(_generateNotification(state.notificationTypes.OK, action.message, action.autoRemovalTimeout));
+        notifications.push(_generateNotification(state.notificationTypes.OK, action.message, action.autoRemovalTimeout, action.icon));
     }
 
     else if (action.type === actionTypes.ADD_INFO) {
-        notifications.push(_generateNotification(state.notificationTypes.INFO, action.message, action.autoRemovalTimeout));
+        notifications.push(_generateNotification(state.notificationTypes.INFO, action.message, action.autoRemovalTimeout, action.icon));
     }
 
     else if (action.type === actionTypes.ADD_ERROR) {
-        notifications.push(_generateNotification(state.notificationTypes.ERROR, action.message, action.autoRemovalTimeout));
+        notifications.push(_generateNotification(state.notificationTypes.ERROR, action.message, action.autoRemovalTimeout, action.icon));
     }
 
     else if (action.type === actionTypes.ADD_WARNING) {
-        notifications.push(_generateNotification(state.notificationTypes.WARNING, action.message, action.autoRemovalTimeout));
+        notifications.push(_generateNotification(state.notificationTypes.WARNING, action.message, action.autoRemovalTimeout, action.icon));
     }
 
     else if (action.type === actionTypes.REMOVE_NOTIFICATION) {
@@ -81,6 +84,6 @@ function _generateId() {
     return Math.floor((Math.random() * size));
 }
 
-function _generateNotification(type, text, autoRemovalTimeout) {
-    return {id: _generateId(), type: type, text: text, removed: false, createdAt: Date.now(), autoRemovalTimeout: autoRemovalTimeout}
+function _generateNotification(type, content, autoRemovalTimeout) {
+    return {id: _generateId(), type: type, content: content, removed: false, createdAt: Date.now(), autoRemovalTimeout: autoRemovalTimeout}
 }
