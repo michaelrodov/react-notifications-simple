@@ -14,8 +14,6 @@ export default class NotificationsContainer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.props.store.subscribe(this._reduxStateChanged.bind(this));
-
 
         const slideIns = {
             left: "animate__slide_right",
@@ -42,8 +40,12 @@ export default class NotificationsContainer extends React.Component {
             slideOut: "animate__slide_out",
             containerClass: starts[this.props.position]
         };
-
         this.props.store.dispatch(ReduxActions.setAutoRemovalTimeout(this.props.autoRemovalTimeout));
+
+    }
+
+    componentDidMount(){
+        this.props.store.subscribe(this._reduxStateChanged.bind(this));
     }
 
     //before react 16
@@ -62,11 +64,12 @@ export default class NotificationsContainer extends React.Component {
     }
 
     render() {
-        console.dir(this.state.notifications);
         let reduxState = this.props.store.getState();
 
         let notificationsList = reduxState.notifications.map((el) => {
             if (el.type.localeCompare(reduxState.notificationTypes.PLACEHOLDER) !== 0) {
+                let className = "notification " + ((!el.type) ? " default--default " : el.type);
+                let slideClass = ((el.removed) ? "removed " + this.state.slideOut : this.state.slideIn);
 
                 return <Notification key={el.id}
                                      id={el.id}
@@ -75,7 +78,7 @@ export default class NotificationsContainer extends React.Component {
                                      icon={el.icon}
                                      removed={el.removed}
                                      includeCloseButton={this.props.theme.includeCloseButton}
-                                     className={this.props.theme.className + " " + ((el.removed) ? "removed " + this.state.slideOut : this.state.slideIn)}
+                                     className={className + " " + slideClass}
                                      destructor={() => {
                                          const timeout = ((!Number.isInteger(el.autoRemovalTimeout) || el.autoRemovalTimeout < 0) ? null : el.autoRemovalTimeout)
                                                             || reduxState.autoRemovalTimeout;

@@ -1,97 +1,60 @@
 @import "colors";
 
-$notification-min-width: 100px;
-$notification-min-height: 30px;
-
-.cartoons.notification {
-    min-width: $notification-min-width;
-    width: fit-content;
-    min-height: $notification-min-height;
-    border-radius: 10px;
-    opacity: 0.9;
+.notification {
+    position: relative;
     align-items: center;
     border: solid 1px $color--grey3;
     margin-bottom: 30px;
     padding: 5px;
-    cursor: pointer;
-    transition: opacity 0.5s ease-out;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.1);
-    color: white;
-    font-size: 20px;
+    opacity: 0.95;
+    transition: all 0.3s ease-out;
 
-    .notification-close {
-        margin-left: 30px;
+    .icon {
+        margin: 5px 15px 5px 5px;
+
     }
 
+    .clickable {
+        cursor: pointer;
+    }
     .notification-icon {
         border-radius: 10px;
         margin-right: 15px;
     }
-
     &:hover {
         opacity: 1;
-        transition: opacity 0.5s ease-out;
     }
 
-    &.error {
-        background-color: $color--notification-red;
+    &.default-- {
+        &default {
+            background-color: $color--grey24;
+            color: $color--white;
+            font-size: 20px;
+        }
+        &error {
+            background-color: $color--notification-red;
+            color: $color--white;
+            font-size: 20px;
+        }
+        &ok {
+            background-color: $color--notification-green;
+            color: $color--white;
+            font-size: 20px;
+        }
+        &warning {
+            background-color: $color--notification-yellow;
+            color: $color--white;
+            font-size: 20px;
+        }
+        &info {
+            background-color: $color--notification-blue;
+            color: $color--white;
+            font-size: 20px;
+        }
 
     }
-    &.ok {
-        background-color: $color--notification-green;
 
-    }
-    &.warning {
-        background-color: $color--notification-yellow;
-    }
-    &.info {
-        background-color: $color--notification-blue;
-    }
-}
-
-.office.notification {
-    min-width: $notification-min-width;
-    min-height: $notification-min-height;
-    border-radius: 2px;
-    opacity: 0.9;
-    align-items: center;
-    border: solid 1px $color--grey3;
-    margin-bottom: 30px;
-    padding: 5px;
-    cursor: pointer;
-    transition: opacity 0.5s ease-out;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.1);
-    color: white;
-    font-size: 20px;
-
-    .notification-close {
-        margin-left: 30px;
-    }
-
-    .notification-icon {
-        border-radius: 10px;
-        margin-right: 15px;
-    }
-
-    &:hover {
-        opacity: 1;
-        transition: opacity 0.3s ease-out;
-    }
-
-    &.error {
-        background-color: $color--notification-red;
-
-    }
-    &.ok {
-        background-color: $color--notification-green;
-
-    }
-    &.warning {
-        background-color: $color--notification-yellow;
-    }
-    &.info {
-        background-color: $color--notification-blue;
-    }
 }
 
 .fadingPlaceholder {
@@ -99,30 +62,22 @@ $notification-min-height: 30px;
 }
 
 .button-close {
+    min-width: 1rem;
+    max-width: 1rem;
+    min-height: 1rem;
+    max-height: 1rem;
     position: absolute;
-    right: 32px;
-    top: 32px;
-    width: 32px;
-    height: 32px;
-    opacity: 0.3;
+    top: -1rem;
+    right: -1rem;
+    cursor: pointer;
+    border-radius: 50%;
+    border: solid 1px $color--grey24;
+    margin: 5px;
+    background-color: $color--white;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4IiB2aWV3Qm94PSIwIDAgMzU3IDM1NyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzU3IDM1NzsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8Zz4KCTxnIGlkPSJjbG9zZSI+CgkJPHBvbHlnb24gcG9pbnRzPSIzNTcsMzUuNyAzMjEuMywwIDE3OC41LDE0Mi44IDM1LjcsMCAwLDM1LjcgMTQyLjgsMTc4LjUgMCwzMjEuMyAzNS43LDM1NyAxNzguNSwyMTQuMiAzMjEuMywzNTcgMzU3LDMyMS4zICAgICAyMTQuMiwxNzguNSAgICIgZmlsbD0iIzAwMDAwMCIvPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=);
 
-    &:hover {
-        opacity: 1;
-    }
-
-    &:before, &:after {
-        position: absolute;
-        left: 15px;
-        content: ' ';
-        height: 33px;
-        width: 2px;
-        background-color: #333;
-    }
-    &:before {
-        transform: rotate(45deg);
-    }
-    &:after {
-        transform: rotate(-45deg);
-    }
 }
 

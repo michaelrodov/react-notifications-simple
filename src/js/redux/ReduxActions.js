@@ -1,9 +1,10 @@
 import * as actionTypes from "./ReduxActionTypes";
 
-export function addNotification(message, isTop, autoRemovalTimeout, icon) {
+export function addNotification(className, content, isTop, autoRemovalTimeout, icon) {
     return {
         type: actionTypes.ADD_NOTIFICATION,
-        message: message,
+        className: (!className) ? "" : className,
+        message: content,
         autoRemovalTimeout:autoRemovalTimeout,
         icon: icon
     }

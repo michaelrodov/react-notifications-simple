@@ -35,22 +35,7 @@ export function reducer(state = initialState, action = {type: actionTypes.INIT_S
     }
 
     else if (action.type === actionTypes.ADD_NOTIFICATION) {
-        notifications.push(_generateNotification(state.notificationTypes.OK, action.message, action.autoRemovalTimeout, action.icon));
-    }
-    else if (action.type === actionTypes.ADD_OK) {
-        notifications.push(_generateNotification(state.notificationTypes.OK, action.message, action.autoRemovalTimeout, action.icon));
-    }
-
-    else if (action.type === actionTypes.ADD_INFO) {
-        notifications.push(_generateNotification(state.notificationTypes.INFO, action.message, action.autoRemovalTimeout, action.icon));
-    }
-
-    else if (action.type === actionTypes.ADD_ERROR) {
-        notifications.push(_generateNotification(state.notificationTypes.ERROR, action.message, action.autoRemovalTimeout, action.icon));
-    }
-
-    else if (action.type === actionTypes.ADD_WARNING) {
-        notifications.push(_generateNotification(state.notificationTypes.WARNING, action.message, action.autoRemovalTimeout, action.icon));
+        notifications.push(_generateNotification(action.className, action.message, action.autoRemovalTimeout, action.icon));
     }
 
     else if (action.type === actionTypes.REMOVE_NOTIFICATION) {
@@ -84,6 +69,6 @@ function _generateId() {
     return Math.floor((Math.random() * size));
 }
 
-function _generateNotification(type, content, autoRemovalTimeout) {
-    return {id: _generateId(), type: type, content: content, removed: false, createdAt: Date.now(), autoRemovalTimeout: autoRemovalTimeout}
+function _generateNotification(className, content, autoRemovalTimeout, icon) {
+    return {id: _generateId(), type: className, content: content, removed: false, createdAt: Date.now(), autoRemovalTimeout: autoRemovalTimeout, icon: icon}
 }

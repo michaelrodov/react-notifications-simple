@@ -7,16 +7,11 @@ export default class Notification extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        let closeButtonDom = <div className={"notification-close flex button-close"}/>;
-
-        if (!this.props.includeCloseButton) {
-            closeButtonDom = <div style={{width: "15px"}}/>
-        }
-
+        let closeButtonDom = <div className={"flex button-close"} onClick={this._close.bind(this)}/>;
 
         let iconElement = (!this.props.icon)
             ? null
-            : <span className={"flex flex__justify-center"}>{this.props.icon}</span>;
+            : <span className={"icon flex flex__justify-center"}>{this.props.icon}</span>;
 
         this.state = {
             iconElement: iconElement,
@@ -53,16 +48,19 @@ export default class Notification extends React.PureComponent {
         const containerStyle = (this.props.removed) ? this._getNotificationTop(containerId) : {};
 
 
-
         return (
             <div id={containerId} style={containerStyle}
-                  onClick={() => NotificationService.NotificationService.remove(this.props.id)}
-                  className={"flex flex__row flex__justify-between notification " + this.props.type + " " + this.props.className}>
-                <div>{this.state.iconElement}</div>
-                <div className={"flex flex__row flex__justify_start"}>
-                    <div id={"message"} className={"notification-message"}>{this.props.content}</div>
+                 onClick={this._clickOnBody.bind(this)}
+                 className={"flex flex__row flex__justify-between notification "
+                            + ((this.props.includeCloseButton) ? "" : " clickable ")
+                            + this.props.type + " " + this.props.className}>
+                <div className={"flex flex__row flex__justify_start flex__align_items_center"}>
+                    {this.state.iconElement}
+                    <div id={"message"}
+                         className={"notification-message"}>{this.props.content}
+                    </div>
+                    {this.state.closeButtonDom}
                 </div>
-                <div>{this.state.closeButtonDom}</div>
             </div>
         )
     }
@@ -77,6 +75,14 @@ export default class Notification extends React.PureComponent {
         return {top: el.offsetTop};
     }
 
+    _clickOnBody(){
+        if(!this.props.includeCloseButton){
+            this._close();
+        }
+    }
+    _close(){
+        NotificationService.NotificationService.remove(this.props.id);
+    }
 
 }
 
@@ -90,7 +96,8 @@ Notification.propTypes = {
     removed: PropTypes.bool,
     includeCloseButton: PropTypes.bool,
     destructor: PropTypes.func,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    onClose: PropTypes.func
 };
 
 Notification.defaultProps = {
