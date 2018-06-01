@@ -1,29 +1,60 @@
 {
   "name": "react-notifications-simple",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Customizable yet simple notifications and toasters written for ReactJS",
+  "main": "lib/react-notifications-simple.min.js",
+  "scripts": {
+    "dev": "webpack-dev-server --env.development --inline --hot --progress --colors --port 4000 --config webpack.dev.config.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "build": "jest && webpack --env.production -p --progress  --config webpack.prod.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michaelrodov/react-notifications-simple"
+  },
   "keywords": [
-    "notification",
+    "react",
     "notifications",
     "simple",
-    "toaster",
-    "react",
-    "reactjs"
+    "customizable"
   ],
-  "main": "lib/react-notifications-simple.min.js",
+  "author": "Michael Rodov",
+  "license": "MIT",
+  "bundleDependencies": [],
   "dependencies": {
-    "loaders.css": "^0.1.2",
-    "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-addons-css-transition-group": "^15.6.2",
-    "react-autosuggest": "^9.3.1",
-    "react-dom": "^16.2.0",
-    "react-dropdown": "^1.3.3",
-    "react-loaders": "^2.6.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2"
   },
+  "peerDependencies": {
+    "react": ">15.0.0",
+    "prop-types": ">15.0.0"
+  },
   "devDependencies": {
+    "babel-jest": "^21.2.0",
+    "cross-env": "^5.1.1",
+    "css-loader": "^0.28.7",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-15": "^1.0.5",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.3",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "faker": "^4.1.0",
+    "guid": "0.0.12",
+    "jest": "^22.4.3",
+    "jest-css-modules": "^1.1.0",
+    "jest-fetch-mock": "^1.3.3",
+    "node-sass": "^4.7.2",
+    "react": "^16.2.0",
+    "react-test-renderer": "^16.2.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.10.0",
+    "webpack-bundle-analyzer": "^2.9.1",
+    "webpack-dev-server": "^2.9.7",
+    "webpack-merge": "^4.1.1",
+    "webpack-validator": "^3.0.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -35,95 +66,8 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.16.0",
     "babel-runtime": "^6.26.0",
-    "babel-jest": "^21.2.0",
-    "cross-env": "^5.1.1",
-    "css-loader": "^0.28.7",
-    "enzyme": "^3.1.1",
-    "enzyme-adapter-react-15": "^1.0.5",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "faker": "^4.1.0",
-    "file-loader": "^1.1.11",
-    "font-loader": "^0.1.2",
-    "guid": "0.0.12",
-    "jest": "^21.2.1",
-    "jest-fetch-mock": "^1.3.3",
-    "node-sass": "^4.7.2",
-    "react-test-renderer": "^15.6.2",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.18.2",
-    "svg-url-loader": "^2.3.2",
-    "url-loader": "^1.0.1",
-    "webpack": "^3.10.0",
-    "webpack-bundle-analyzer": "^2.9.1",
-    "webpack-dev-server": "^2.9.7",
-    "webpack-merge": "^4.1.1",
-    "webpack-validator": "^3.0.0"
-  },
-  "scripts": {
-    "dev": "webpack-dev-server --env.development --inline --hot --progress --colors --port 4000 --config webpack.dev.config.js",
-    "test": "jest --env.test",
-    "build": "webpack --env.production -p --progress  --config webpack.prod.config.js"
-  },
-  "authors": [
-    "Michael Rodov"
-  ],
-  "private": false,
-  "license": "MIT",
-  "files": [
-    "lib"
-  ],
-  "repository": "https://github.com/michaelrodov/react-notifications-simple",
-  "jest": {
-    "transform": {
-      "^.*\\.(jsx?)$": "<rootDir>/node_modules/babel-jest"
-    },
-    "verbose": false,
-    "coverageDirectory": "coverage",
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/node_modules/"
-    ],
-    "moduleNameMapper": {
-      "\\.(s?css)$": "<rootDir>/__mocks__/styleMock.js"
-    },
-    "modulePathIgnorePatterns": [
-      "<rootDir>/src/style"
-    ],
-    "modulePaths": [
-      "<rootDir>/src/js/components"
-    ],
-    "collectCoverage": true
-  },
-  "babel": {
-    "env": {
-      "test": {
-        "plugins": [
-          "transform-es2015-modules-commonjs"
-        ],
-        "presets": [
-          [
-            "es2015",
-            {
-              "modules": false
-            }
-          ],
-          "react",
-          "stage-0"
-        ],
-        "env": {
-          "start": {
-            "presets": [
-              "react-hmre"
-            ]
-          },
-          "test": {
-            "presets": [
-              "es2015",
-              "react",
-              "stage-0"
-            ]
-          }
-        }
-      }
-    }
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-autosuggest": "^9.3.1",
+    "react-dom": "^16.2.0"
   }
 }

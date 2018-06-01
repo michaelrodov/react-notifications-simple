@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import "notification";
+import "notification.scss";
 import * as NotificationService from "NotificationService";
 
 export default class Notification extends React.PureComponent {
@@ -19,33 +19,9 @@ export default class Notification extends React.PureComponent {
         }
     }
 
-
-    //
-    // //react < 16
-    // componentWillReceiveProps(nextProps) {
-    //     if (nextProps.includeIcon !== this.props.includeIcon) {
-    //         let iconElement = (!nextProps.includeIcon || !nextProps.icon)
-    //             ? null
-    //             : <span className={"flex flex__justify-center"}><i className={"notification-icon " + nextProps.icon} aria-hidden="true"/></span>;
-    //
-    //         this.setState({iconElement: iconElement});
-    //     }
-    // }
-    //
-    // //react 16+
-    // static getDerivedStateFromProps(nextProps, prevState) {
-    //     if (nextProps.includeIcon !== this.props.includeIcon) {
-    //         let iconElement = (!nextProps.includeIcon || !nextProps.icon)
-    //             ? null
-    //             : <span className={"flex flex__justify-center"}><i className={"notification-icon " + nextProps.icon} aria-hidden="true"/></span>;
-    //
-    //         this.setState({iconElement: iconElement});
-    //     }
-    // }
-
     render() {
         const containerId = "container_" + this.props.id;
-        const containerStyle = (this.props.removed) ? this._getNotificationTop(containerId) : {};
+        const containerStyle = (this.props.removed) ? Notification.getNotificationTop(containerId) : {};
 
 
         return (
@@ -70,7 +46,7 @@ export default class Notification extends React.PureComponent {
         this.props.destructor && this.props.destructor();
     }
 
-    _getNotificationTop(containerId) {
+    static getNotificationTop(containerId) {
         const el = document.getElementById(containerId);
         return {top: el.offsetTop};
     }

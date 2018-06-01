@@ -10,6 +10,10 @@ webpackBaseConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({sourceMap: f
 
 module.exports = merge(webpackBaseConfig, {
     entry: "./src/index.js",
+    externals: {
+        react: 'react',
+        "prop-types":'prop-types'
+    },
     output: {
         library: packagejson.name,
         libraryTarget: "umd",

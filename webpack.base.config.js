@@ -1,4 +1,3 @@
-let webpack = require('webpack');
 let path = require('path');
 
 
@@ -8,6 +7,7 @@ let config = {
         extensions: ['.scss', '.jsx', '.js'],
         modules: [
             path.resolve('./src/js'),
+            path.resolve('./src/js/components'),
             path.resolve('./src/style'),
             path.resolve('./node_modules')
         ]
@@ -32,8 +32,8 @@ let config = {
                 loaders: ['svg-url-loader']
             },
             {
-                test: /\.(jpe|jpg|woff|woff2|eot|ttf|svg)(\?.*$|$)/,
-                loader: 'file-loader'
+                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                loader: 'url-loader?limit=100000'
             }
         ]
     },

@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Notification from "Notification";
 import FadingPlaceholder from "FadingPlaceholder";
-import * as ReduxActions from "./redux/ReduxActions";
+import * as ReduxActions from "redux/ReduxActions";
 
 import "notification-container.scss";
 import "flex.scss";
 import "animations.scss";
-// import "../fonts/font-awesome-4.7.0/css/font-awesome.min.css";
 
 
 export default class NotificationsContainer extends React.Component {
@@ -48,18 +47,9 @@ export default class NotificationsContainer extends React.Component {
         this.props.store.subscribe(this._reduxStateChanged.bind(this));
     }
 
-    //before react 16
-    //TODO: REFACTOR | Remove after react 15 EOL
-    componentWillReceiveProps(nextProps){
-        if(nextProps.setAutoRemovalTimeout !== this.props.autoRemovalTimeout){
-            this.props.store.dispatch(ReduxActions.setAutoRemovalTimeout(nextProps.autoRemovalTimeout));
-        }
-    }
-
-    //react 16+
-    static getDerivedStateFromProps(nextProps, prevState){
-        if(nextProps.setAutoRemovalTimeout !== this.props.autoRemovalTimeout){
-            this.props.store.dispatch(ReduxActions.setAutoRemovalTimeout(nextProps.autoRemovalTimeout));
+    componentDidUpdate(prevProps, prevState, snapshot){
+        if(prevProps.setAutoRemovalTimeout !== this.props.autoRemovalTimeout){
+            this.props.store.dispatch(ReduxActions.setAutoRemovalTimeout(this.props.autoRemovalTimeout));
         }
     }
 

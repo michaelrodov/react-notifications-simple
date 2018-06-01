@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import "notification";
+import "notification.scss";
 import "animations";
 
 

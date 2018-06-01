@@ -1,6 +1,6 @@
-import setStore from "./redux/ReduxStore";
-import * as ReduxReducers from "./redux/ReduxReducers";
-import * as ReduxActions from "./redux/ReduxActions";
+import setStore from "redux/ReduxStore";
+import * as ReduxReducers from "redux/ReduxReducers";
+import * as ReduxActions from "redux/ReduxActions";
 
 
 //TODO add notification decorator
