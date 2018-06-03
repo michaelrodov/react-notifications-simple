@@ -13,19 +13,6 @@ export default class NotificationsContainer extends React.Component {
     constructor(props) {
         super(props);
 
-
-        const slideIns = {
-            left: "animate__slide_right",
-            right: "animate__slide_left",
-            top: "animate__slide_bottom",
-            bottom: "animate__slide_top"
-        };
-        const slideOuts = {
-            left: "animate__slide_left",
-            right: "animate__slide_right",
-            top: "animate__slide_top",
-            bottom: "animate__slide_bottom"
-        };
         const starts = {
             left: "start-left",
             right: "start-right",
@@ -48,7 +35,7 @@ export default class NotificationsContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot){
-        if(prevProps.setAutoRemovalTimeout !== this.props.autoRemovalTimeout){
+        if(prevProps.autoRemovalTimeout !== this.props.autoRemovalTimeout){
             this.props.store.dispatch(ReduxActions.setAutoRemovalTimeout(this.props.autoRemovalTimeout));
         }
     }
