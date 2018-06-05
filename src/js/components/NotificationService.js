@@ -25,24 +25,24 @@ class EventService {
     }
 
     //todo add notification disappearence timeout. as a global setting, and as an option per notification
-    notification(className, content, autoRemovalTimeout, icon) {
+    notify(className, content, autoRemovalTimeout, icon) {
         this.store.dispatch(ReduxActions.addNotification(className, content, false, autoRemovalTimeout, icon));
     }
 
-    errorNotification(content) {
-        this.notification("default--error", content, null, null);
+    error(content) {
+        this.notify("default--error", content, null, null);
     }
 
-    infoNotification(content) {
-        this.notification("default--info", content, null, null);
+    info(content) {
+        this.notify("default--info", content, null, null);
     }
 
-    okNotification(content) {
-        this.notification("default--ok", content, null, null);
+    ok(content) {
+        this.notify("default--ok", content, null, null);
     }
 
-    warningNotification(content) {
-        this.notification("default--warning", content, null, null);
+    warning(content) {
+        this.notify("default--warning", content, null, null);
     }
 
 

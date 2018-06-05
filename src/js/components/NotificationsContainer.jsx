@@ -45,7 +45,9 @@ export default class NotificationsContainer extends React.Component {
 
         let notificationsList = reduxState.notifications.map((el) => {
             if (el.type.localeCompare(reduxState.notificationTypes.PLACEHOLDER) !== 0) {
-                let className = "notification " + ((!el.type) ? " default--default " : el.type);
+                let globalNotificationClass = (!this.props.theme.notificationClass) ? "default--default" : this.props.theme.notificationClass;
+                let specificNotificationClass = (!el.type) ? "" : el.type;
+                let className = "notify " + globalNotificationClass + " " + specificNotificationClass;
                 let slideClass = ((el.removed) ? "removed " + this.state.slideOut : this.state.slideIn);
 
                 return <Notification key={el.id}
@@ -55,6 +57,7 @@ export default class NotificationsContainer extends React.Component {
                                      icon={el.icon}
                                      removed={el.removed}
                                      includeCloseButton={this.props.theme.includeCloseButton}
+                                     closeButtonClass={this.props.theme.closeButtonClass}
                                      className={className + " " + slideClass}
                                      destructor={() => {
                                          const timeout = ((!Number.isInteger(el.autoRemovalTimeout) || el.autoRemovalTimeout < 0) ? null : el.autoRemovalTimeout)

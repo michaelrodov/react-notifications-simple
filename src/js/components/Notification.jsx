@@ -7,7 +7,8 @@ export default class Notification extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        let closeButtonDom = <div className={"flex button-close"} onClick={this._close.bind(this)}/>;
+        const closeButtonClass = (!this.props.closeButtonClass) ? "default-close-button" : this.props.closeButtonClass;
+        let closeButtonDom = <div className={"flex button " + closeButtonClass} onClick={this._close.bind(this)}/>;
 
         let iconElement = (!this.props.icon)
             ? null
@@ -28,8 +29,10 @@ export default class Notification extends React.PureComponent {
             <div id={containerId} style={containerStyle}
                  onClick={this._clickOnBody.bind(this)}
                  className={"flex flex__row flex__justify-between notification "
-                            + ((this.props.includeCloseButton) ? "" : " clickable ")
-                            + this.props.type + " " + this.props.className}>
+                                + ((this.props.includeCloseButton) ? "" : " clickable ")
+                                + this.props.type + " "
+                                + this.props.className}>
+
                 <div className={"flex flex__row flex__justify_start flex__align_items_center"}>
                     {this.state.iconElement}
                     <div id={"message"}
@@ -51,12 +54,13 @@ export default class Notification extends React.PureComponent {
         return {top: el.offsetTop};
     }
 
-    _clickOnBody(){
-        if(!this.props.includeCloseButton){
+    _clickOnBody() {
+        if (!this.props.includeCloseButton) {
             this._close();
         }
     }
-    _close(){
+
+    _close() {
         NotificationService.NotificationService.remove(this.props.id);
     }
 
@@ -65,6 +69,7 @@ export default class Notification extends React.PureComponent {
 
 Notification.propTypes = {
     className: PropTypes.string,
+    closeButtonClass: PropTypes.string,
     type: PropTypes.string,
     style: PropTypes.object,
     content: PropTypes.node,
